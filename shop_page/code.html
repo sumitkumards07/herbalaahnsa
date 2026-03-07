@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#20df20",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#112111",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <title>Aashna Herbals | Shop</title>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="layout-container flex flex-col min-h-screen">
+        <!-- Top Navigation Bar -->
+        <header
+            class="flex items-center justify-between border-b border-primary/10 bg-white dark:bg-background-dark px-6 md:px-20 py-4 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-2 text-primary">
+                    <span class="material-symbols-outlined text-3xl">eco</span>
+                    <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">Aashna
+                        Herbals</h2>
+                </div>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
+                        href="../home_page/code.html">Home</a>
+                    <a class="text-primary text-sm font-bold border-b-2 border-primary"
+                        href="../shop_page/code.html">Shop</a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
+                        href="../about_us_page/code.html">About</a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
+                        href="../contact_page/code.html">Contact</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div
+                    class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-1.5 border border-transparent focus-within:border-primary/50">
+                    <span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+                    <input id="shop-search"
+                        class="bg-transparent border-none focus:ring-0 text-sm w-40 md:w-60 placeholder:text-slate-400"
+                        placeholder="Search herbs..." type="text" />
+                </div>
+                <div class="flex gap-2 items-center">
+                    <button id="theme-toggle"
+                        class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined dark:hidden">dark_mode</span>
+                        <span class="material-symbols-outlined hidden dark:block">light_mode</span>
+                    </button>
+                    <button id="cart-btn"
+                        class="relative p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <span id="cart-counter"
+                            class="absolute -top-1 -right-1 bg-primary text-[10px] text-white font-bold px-1.5 rounded-full hidden">0</span>
+                    </button>
+                    <button id="user-btn"
+                        class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary/20 transition-colors">
+                        <span class="material-symbols-outlined">person</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 max-w-[1440px] mx-auto w-full px-6 md:px-20 py-8 flex flex-col md:flex-row gap-8">
+            <!-- Sidebar Filters -->
+            <aside class="w-full md:w-64 shrink-0 space-y-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">category</span>
+                        Categories
+                    </h3>
+                    <div class="flex flex-col gap-1 category-filters">
+                        <button data-category="all"
+                            class="active-category flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 text-primary font-semibold text-sm">
+                            <span>All Products</span>
+                            <span class="text-xs bg-primary text-white px-2 py-0.5 rounded-full">6</span>
+                        </button>
+                        <button data-category="skincare"
+                            class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm transition-colors">
+                            <span class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-lg">spa</span>Skincare</span>
+                            <span class="text-xs text-slate-400">1</span>
+                        </button>
+                        <button data-category="haircare"
+                            class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm transition-colors">
+                            <span class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-lg">auto_awesome</span>Haircare</span>
+                            <span class="text-xs text-slate-400">1</span>
+                        </button>
+                        <button data-category="wellness"
+                            class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm transition-colors">
+                            <span class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-lg">favorite</span>Wellness</span>
+                            <span class="text-xs text-slate-400">2</span>
+                        </button>
+                        <button data-category="tea"
+                            class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm transition-colors">
+                            <span class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-lg">coffee</span>Tea &amp; Infusions</span>
+                            <span class="text-xs text-slate-400">1</span>
+                        </button>
+                        <button data-category="essential_oils"
+                            class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm transition-colors">
+                            <span class="flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-lg">water_drop</span>Essential Oils</span>
+                            <span class="text-xs text-slate-400">1</span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">filter_list</span>
+                        Filters
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Availability</p>
+                            <label class="flex items-center gap-2 text-sm cursor-pointer group">
+                                <input checked=""
+                                    class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4"
+                                    type="checkbox" />
+                                <span class="group-hover:text-primary transition-colors">In Stock Only</span>
+                            </label>
+                            <label class="flex items-center gap-2 text-sm cursor-pointer group">
+                                <input class="rounded border-slate-300 text-primary focus:ring-primary h-4 w-4"
+                                    type="checkbox" />
+                                <span class="group-hover:text-primary transition-colors">On Sale</span>
+                            </label>
+                        </div>
+                        <div class="space-y-2 pt-4">
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Price Range</p>
+                            <input class="w-full accent-primary" type="range" />
+                            <div class="flex justify-between text-xs text-slate-500">
+                                <span>$0</span>
+                                <span>$500+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!-- Product Grid Section -->
+            <div class="flex-1">
+                <div class="mb-8">
+                    <div class="flex flex-wrap items-end justify-between gap-4">
+                        <div>
+                            <nav class="flex items-center gap-2 text-xs text-slate-400 mb-2">
+                                <a class="hover:text-primary" href="#">Home</a>
+                                <span class="material-symbols-outlined text-[10px]">chevron_right</span>
+                                <span class="text-slate-600 dark:text-slate-200">Herbal Shop</span>
+                            </nav>
+                            <h1 class="text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100">Our Herbal
+                                Collection</h1>
+                            <p class="text-slate-500 dark:text-slate-400 mt-1">Pure, natural, and sustainably sourced
+                                remedies for your well-being.</p>
+                        </div>
+                        <div
+                            class="flex items-center gap-3 bg-white dark:bg-slate-800 p-1 rounded-lg border border-slate-100 dark:border-slate-700">
+                            <button
+                                class="px-3 py-1.5 bg-slate-100 dark:bg-slate-700 rounded text-sm font-medium">Grid</button>
+                            <button
+                                class="px-3 py-1.5 text-slate-400 hover:text-primary text-sm font-medium transition-colors">List</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Product Card 1 -->
+                    <div data-category="wellness"
+                        class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="Glass jar of green herbal powder on wooden table"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6_K9cI-T8AQA-VzN6cDHN3Cg7z10PIZRjQwfj22aqUwwdLQJUrvWMB2Yzfk79tZAWvGsrQyqCnVqa8X9iMcQp64cl-lnxbvaG1rQWD1fLWBqwFDgOydX7K3f3uX3uj4KiWFZ9KjteXzxlubkLjtmu-LUpj56BFr7q1ZgpKeVNr4NzHpZTLfSNWKYt_IHnK1cTIYV75914S8OU2ASDeL-d1o8O7maD5nXC4eja_pQjHTXTLyaAwQ0YNbaLXB_avs-4wIWxsZdf" />
+                            <span
+                                class="absolute top-3 left-3 bg-primary/90 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">New</span>
+                            <button
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Wellness</p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Organic
+                                Neem Powder
+                            </h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">100% Pure Indian
+                                Neem leaves. Ideal for detox and skin purification.</p>
+                            <div class="mt-auto flex items-center justify-between">
+                                <span class="text-xl font-black text-slate-900 dark:text-slate-100">$24.00</span>
+                                <button onclick="addToCart('Organic Neem Powder')"
+                                    class="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div data-category="essential_oils"
+                        class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="Lavender essential oil bottle and dried lavender flowers"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc6E2-olp7-5BrLK2n7BXoZfwfkxc03ZuhWjPI4iBVWo6j9lVUX-0H90wd8ZrkQ2NjL8pNcDyQRLw2NxMYuo0G9xu5QQOlSestmYqe-VmtjoEiqhBhyojQIXQS3D0hoNw6_9z0VtIrHMImNTkuXHpIL2m6W77yWa3L4H1sTRId1HcXjDaRWktbMAqg0HXSZT9r6bbwkluKhg4spcDftjlrbtPiizqPH3FG2ABcFjXujNy5c026v7ZPue50U5f2I1QQTgqHtXO8" />
+                            <span
+                                class="absolute top-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Sale</span>
+                            <button
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Essential Oils
+                            </p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Lavender
+                                Relief Mist
+                            </h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Calming aromatherapy
+                                spray for better sleep and anxiety relief.</p>
+                            <div class="mt-auto flex items-center justify-between">
+                                <div class="flex flex-col">
+                                    <span class="text-xl font-black text-slate-900 dark:text-slate-100">$18.50</span>
+                                    <span class="text-xs text-slate-400 line-through">$22.00</span>
+                                </div>
+                                <button onclick="addToCart('Lavender Relief Mist')"
+                                    class="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div data-category="tea"
+                        class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="Herbal tea leaves in a wooden bowl"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRAmzwdaR1JtRQBLDi3zE7DRxkSo1Lsk9W1s6boBw4ECQMgWpvb5g8BTatX0svp8KwitY23V0lHfZSMBpBi6mD-YKVGCbpezHzwJ_y_x54LK36mlZbFQzyfbFLhFfi2UBUq2RjQR60TabHBaf7hXWtiFWNZl24PHV5BafYF9UUsr_J6Z3OnQMNsD7TZw4CNLWu674yVpis7F50FtbzaiilNZuoLE9evhoFSQZOew840r1A4pPbVw2gnMhYE5ffijHXkP4fygLd" />
+                            <button
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Tea &amp;
+                                Infusions</p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Sunrise
+                                Detox Tea</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">A refreshing blend
+                                of Ginger, Turmeric, and Holy Basil.</p>
+                            <div class="mt-auto flex items-center justify-between">
+                                <span class="text-xl font-black text-slate-900 dark:text-slate-100">$15.00</span>
+                                <button onclick="addToCart('Sunrise Detox Tea')"
+                                    class="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 4 -->
+                    <div data-category="haircare"
+                        class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="Amla berries and powder in a rustic bowl"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwXxbXqdnR3i0yNTzITRllyYI8DkHSyeNbeKmHPmDeO_DsJC5PEp9lvQneo57MIpSXalrji0gLc7-v8XFRZq0S-rjBiop_hwEDzpRzegy7BoDkDC_QtCwhQ_XD7i7AOzTi2tYASHLXzyzVlbFwR8XBRmytu8dL5pa10NN1hv5d-i6r8b04p6hXovfZ2mtgd5x6AUir3jUaxnai8-mA3vP52JmEXd3u0M0yFwgJ4cvX6qp4hdcdk_sXyoqQfb8C1fAbkwW5VpVG" />
+                            <button
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Haircare</p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Amla
+                                Rejuvenating Oil
+                            </h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Deep conditioning
+                                hair oil for growth and natural shine.</p>
+                            <div class="mt-auto flex items-center justify-between">
+                                <span class="text-xl font-black text-slate-900 dark:text-slate-100">$32.00</span>
+                                <button onclick="addToCart('Amla Rejuvenating Oil')"
+                                    class="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 5 -->
+                    <div data-category="skincare"
+                        class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="Saffron strands in a small wooden bowl"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ4S9AlgQxfks510KoerTva3Q646lYqFA5QoQNS3Jx_E2nIX9fVH34n4AX6bmKZ98npYGxt05l56p2HPYT4ETXTsRpASSVEeBFu92VY2s6ssjVWjJnAywbnNptc4L53Wnb69Jum302B3OokRkodu58Yx7rp_ytMRRJWy6emV8tIu-1cSvtNawaC_jDww_ad81QgM0UI0StBhDjKiXvs2vdAWhl4rKlhH4cS9qUbSAW5XlZQNhxCVCK4iHSoYSJaTQhTFLLnBxk" />
+                            <button
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Skincare</p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Kashmiri
+                                Saffron Face
+                                Pack</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">Premium saffron
+                                blended with sandalwood for a radiant glow.</p>
+                            <div class="mt-auto flex items-center justify-between">
+                                <span class="text-xl font-black text-slate-900 dark:text-slate-100">$45.00</span>
+                                <button onclick="addToCart('Kashmiri Saffron Face Pack')"
+                                    class="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Card 6 -->
+                    <div data-category="wellness"
+                        class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                data-alt="Fresh organic turmeric roots on a surface"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM7LY6qXDjCcpBhMD6ufKJtmYC43m8HFCCNlgO6Vkd6VA0onoj-wROA9E6Ay5n0fXdXa2XNjUXpnMiulSMkBxTqOvQ1IBAiqsKsg-BzIbuiBbOGQeQKCa5fSUP1CR33l0x_re-FhpOd25blvHy5UP0HZ5onPztSqIARMvpTsyxtG2hSD08w5LBgghlKx86CGp6EAcPnGX2uKvbQFZVghDzkbLKtWM36CEqDpLgN2Vurz_8q4BItr_jYbjbzopHy2Cgbti9s45Z" />
+                            <button
+                                class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
+                            </button>
+                        </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Wellness</p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Curcumin
+                                Gold Capsules
+                            </h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">High-potency
+                                turmeric supplement for joint health and inflammation.</p>
+                            <div class="mt-auto flex items-center justify-between">
+                                <span class="text-xl font-black text-slate-900 dark:text-slate-100">$28.90</span>
+                                <button onclick="addToCart('Curcumin Gold Capsules')"
+                                    class="bg-primary text-white hover:bg-primary/90 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="mt-12 flex justify-center">
+                    <nav class="flex items-center gap-2">
+                        <button class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <button class="w-10 h-10 rounded-lg bg-primary text-white font-bold">1</button>
+                        <button
+                            class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-colors">2</button>
+                        <button
+                            class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-colors">3</button>
+                        <span class="text-slate-400 px-2">...</span>
+                        <button
+                            class="w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-colors">8</button>
+                        <button
+                            class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 transition-colors">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </main>
+        <!-- Newsletter Section -->
+        <section class="bg-primary/10 py-16 px-6">
+            <div class="max-w-[1440px] mx-auto text-center space-y-6">
+                <h2 class="text-3xl font-black text-slate-900 dark:text-slate-100">Join the Herbal Way of Living</h2>
+                <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">Subscribe to get seasonal health tips,
+                    exclusive early access to new products, and 10% off your first order.</p>
+                <form id="subscribe-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input required
+                        class="flex-1 rounded-lg border-transparent bg-white dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent px-4 py-3"
+                        placeholder="Your email address" type="email" />
+                    <button
+                        class="bg-primary text-white font-bold px-8 py-3 rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                        type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-background-dark border-t border-primary/10 py-12 px-6 md:px-20">
+            <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-3xl">eco</span>
+                        <h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold">Aashna Herbals</h2>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Restoring balance through nature's wisdom. We
+                        provide ethically sourced herbs and natural remedies for a holistic lifestyle.</p>
+                    <div class="flex gap-4">
+                        <a class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                            href="#">
+                            <span class="material-symbols-outlined text-lg">share</span>
+                        </a>
+                        <a class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                            href="#">
+                            <span class="material-symbols-outlined text-lg">alternate_email</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors" href="#">Shop All</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Best Sellers</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Gift Cards</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Wholesale</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Support</h4>
+                    <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors" href="#">Shipping Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Returns &amp; Refunds</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6">Visit Our Store</h4>
+                    <ul class="space-y-4 text-sm text-slate-500 dark:text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-lg">location_on</span>
+                            <span>123 Herbal Garden Lane,<br />Greenfield, CA 93927</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-lg">call</span>
+                            <span>+1 (555) HERBAL-01</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="max-w-[1440px] mx-auto mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                <p>© 2024 Aashna Herbals. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span class="material-symbols-outlined text-2xl">credit_card</span>
+                    <span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+                    <span class="material-symbols-outlined text-2xl">payments</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // --- Global JS (Theme, Cart) ---
+        // Dark mode logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (localStorage.theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', function () {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Mock Cart and User functionality
+        let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+        const cartCounterEl = document.getElementById('cart-counter');
+
+        function updateCartUI() {
+            if (cartCount > 0) {
+                cartCounterEl.textContent = cartCount;
+                cartCounterEl.classList.remove('hidden');
+            } else {
+                cartCounterEl.classList.add('hidden');
+            }
+        }
+        updateCartUI();
+
+        document.getElementById('cart-btn').addEventListener('click', () => {
+            Swal.fire({
+                title: 'Shopping Cart',
+                text: cartCount > 0 ? `You have ${cartCount} items in your bag.` : 'Your bag is empty.',
+                icon: 'info',
+                confirmButtonColor: '#20df20'
+            });
+        });
+
+        document.getElementById('user-btn').addEventListener('click', () => {
+            Swal.fire({
+                title: 'Account Access',
+                text: 'Sign in feature coming soon!',
+                icon: 'info',
+                confirmButtonColor: '#20df20'
+            });
+        });
+
+        // Make global helper functions to trigger toasts
+        window.showToast = function (title, text, icon) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                icon: icon,
+                title: title,
+                text: text,
+            });
+        }
+
+        window.addToCart = function (productName) {
+            cartCount++;
+            localStorage.setItem('cartCount', cartCount);
+            updateCartUI();
+            window.showToast('Added to Cart', `${productName} has been added!`, 'success');
+        }
+
+        // --- Shop Page Specific JS ---
+        // Handle form submission
+        document.getElementById('subscribe-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            window.showToast('Subscribed!', 'Welcome to the Aashna Family.', 'success');
+            e.target.reset();
+        });
+
+        // Filtering logic
+        const categoryBtns = document.querySelectorAll('.category-filters button');
+        const productItems = document.querySelectorAll('.product-item');
+        const searchInput = document.getElementById('shop-search');
+
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-filters button.active-category').getAttribute('data-category');
+
+            productItems.forEach(item => {
+                const matchesCategory = activeCategory === 'all' || item.getAttribute('data-category') === activeCategory;
+                const matchesSearch = item.querySelector('.product-title').textContent.toLowerCase().includes(searchTerm);
+
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active style from all
+                categoryBtns.forEach(b => {
+                    b.classList.remove('active-category', 'bg-primary/10', 'text-primary');
+                    b.classList.add('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+                });
+                // Add active style to clicked
+                btn.classList.add('active-category', 'bg-primary/10', 'text-primary');
+                btn.classList.remove('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+
+                filterProducts();
+            });
+        });
+
+        searchInput.addEventListener('input', filterProducts);
+    </script>
+</body>
+
+</html>
