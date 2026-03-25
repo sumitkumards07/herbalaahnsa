@@ -279,6 +279,29 @@
                     <span class="material-symbols-outlined">mail</span> Contact Us
                 </a>
             </nav>
+            <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800">
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">category</span>
+                    Shop Categories
+                </h3>
+                <div class="flex flex-col gap-2 category-filters">
+                    <button data-category="all" class="active-category flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 text-primary font-semibold text-sm">
+                        <span>All Products</span>
+                    </button>
+                    <button data-category="skincare" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 text-sm">
+                        <span>Skincare</span>
+                    </button>
+                    <button data-category="haircare" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 text-sm">
+                        <span>Haircare</span>
+                    </button>
+                    <button data-category="wellness" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 text-sm">
+                        <span>Wellness</span>
+                    </button>
+                    <button data-category="tea" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 text-sm">
+                        <span>Tea & Infusions</span>
+                    </button>
+                </div>
+            </div>
             <div class="mt-auto p-6 border-t border-slate-100 dark:border-slate-800">
                 <button id="user-btn-mobile" class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 py-3 rounded-lg font-bold">
                     <span class="material-symbols-outlined">person</span>
@@ -404,6 +427,14 @@
                 btn.classList.remove('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
 
                 renderProducts(category, searchInput.value);
+
+                // Close mobile menu if open
+                if (typeof toggleMobileMenu === 'function') {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu && !mobileMenu.classList.contains('-translate-x-full')) {
+                        toggleMobileMenu();
+                    }
+                }
             });
         });
 
