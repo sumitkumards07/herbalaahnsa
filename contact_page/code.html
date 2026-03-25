@@ -321,48 +321,50 @@
         </div>
     </div>
     <script>
-        // --- Page Logic (Theme Toggle, Local Events) ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (localStorage.theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', function () {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Page Logic (Theme Toggle, Local Events) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
             }
-        });
 
-        document.getElementById('user-btn').addEventListener('click', showAccountAlert);
-        if (document.getElementById('user-btn-mobile')) {
-            document.getElementById('user-btn-mobile').addEventListener('click', showAccountAlert);
-        }
-
-        function showAccountAlert() {
-            Swal.fire({
-                title: 'Account Access',
-                text: 'Sign in feature coming soon!',
-                icon: 'info',
-                confirmButtonColor: '#20df20'
+            themeToggleBtn.addEventListener('click', function () {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                }
             });
-        }
 
-        // --- Contact Page Specific JS ---
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Message Sent!',
-                text: 'We have received your message and will get back to you shortly.',
-                icon: 'success',
-                confirmButtonColor: '#20df20'
+            document.getElementById('user-btn').addEventListener('click', showAccountAlert);
+            if (document.getElementById('user-btn-mobile')) {
+                document.getElementById('user-btn-mobile').addEventListener('click', showAccountAlert);
+            }
+
+            function showAccountAlert() {
+                Swal.fire({
+                    title: 'Account Access',
+                    text: 'Sign in feature coming soon!',
+                    icon: 'info',
+                    confirmButtonColor: '#20df20'
+                });
+            }
+
+            // --- Contact Page Specific JS ---
+            document.getElementById('contact-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Message Sent!',
+                    text: 'We have received your message and will get back to you shortly.',
+                    icon: 'success',
+                    confirmButtonColor: '#20df20'
+                });
+                e.target.reset();
             });
-            e.target.reset();
         });
     </script>
     <script src="../js/animations.js" defer></script>

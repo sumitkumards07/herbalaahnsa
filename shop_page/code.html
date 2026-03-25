@@ -339,127 +339,141 @@
         </div>
     </div>
     <script>
-        // --- Page Logic (Theme Toggle, Local Events) ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (localStorage.theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', function () {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Page Logic (Theme Toggle, Local Events) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
             }
-        });
 
-        document.getElementById('user-btn').addEventListener('click', showAccountAlert);
-        if (document.getElementById('user-btn-mobile')) {
-            document.getElementById('user-btn-mobile').addEventListener('click', showAccountAlert);
-        }
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.theme = 'light';
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.theme = 'dark';
+                    }
+                });
+            }
 
-        function showAccountAlert() {
-            Swal.fire({
-                title: 'Account Access',
-                text: 'Sign in feature coming soon!',
-                icon: 'info',
-                confirmButtonColor: '#20df20'
-            });
-        }
+            const userBtn = document.getElementById('user-btn');
+            if (userBtn) userBtn.addEventListener('click', showAccountAlert);
+            
+            const userBtnMobile = document.getElementById('user-btn-mobile');
+            if (userBtnMobile) userBtnMobile.addEventListener('click', showAccountAlert);
 
-        // --- Shop Page Specific JS ---
-        const productGrid = document.getElementById('product-grid');
-        const categoryBtns = document.querySelectorAll('.category-filters button');
-        const searchInput = document.getElementById('shop-search');
+            function showAccountAlert() {
+                Swal.fire({
+                    title: 'Account Access',
+                    text: 'Sign in feature coming soon!',
+                    icon: 'info',
+                    confirmButtonColor: '#20df20'
+                });
+            }
 
-        function renderProducts(filter = 'all', search = '') {
-            const filteredProducts = products.filter(p => {
-                const matchesCategory = filter === 'all' || p.category === filter;
-                const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
-                return matchesCategory && matchesSearch;
-            });
+            // --- Shop Page Specific JS ---
+            const productGrid = document.getElementById('product-grid');
+            const categoryBtns = document.querySelectorAll('.category-filters button');
+            const searchInput = document.getElementById('shop-search');
 
-            productGrid.innerHTML = filteredProducts.map(p => `
-                <div class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col reveal tilt-card">
-                    <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800 cursor-pointer" onclick="showProductDetails('${p.id}')">
-                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            src="${p.image}" alt="${p.name}" />
-                        ${p.oldPrice ? '<span class="absolute top-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Sale</span>' : ''}
-                        <button class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
-                            <span class="material-symbols-outlined text-sm">favorite</span>
-                        </button>
-                    </div>
-                    <div class="p-5 flex flex-col flex-1">
-                        <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">${p.category.replace('_', ' ')}</p>
-                        <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 cursor-pointer hover:text-primary transition-colors" onclick="showProductDetails('${p.id}')">${p.name}</h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">${p.description}</p>
-                        <div class="mt-auto flex flex-col gap-3">
-                            <div class="flex items-center justify-between">
-                                <div class="flex flex-col">
-                                    <span class="text-xl font-black text-slate-900 dark:text-slate-100">₹${p.price.toLocaleString()}</span>
-                                    ${p.oldPrice ? `<span class="text-xs text-slate-400 line-through">₹${p.oldPrice.toLocaleString()}</span>` : ''}
-                                </div>
-                                <button onclick="addToCart('${p.id}')"
-                                    class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white size-10 rounded-lg flex items-center justify-center transition-all active:scale-95 shadow-sm">
-                                    <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
-                                </button>
-                            </div>
-                            <button onclick="showProductDetails('${p.id}')"
-                                class="w-full bg-primary text-slate-900 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md shadow-primary/20">
-                                <span class="material-symbols-outlined text-lg">bolt</span>
-                                Buy Now
+            function renderProducts(filter = 'all', search = '') {
+                if (!productGrid || typeof products === 'undefined') return;
+
+                const filteredProducts = products.filter(p => {
+                    const matchesCategory = filter === 'all' || p.category === filter;
+                    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
+                    return matchesCategory && matchesSearch;
+                });
+
+                productGrid.innerHTML = filteredProducts.map(p => `
+                    <div class="product-item group bg-white dark:bg-slate-800/50 rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:shadow-primary/5 transition-all flex flex-col reveal tilt-card">
+                        <div class="relative aspect-square overflow-hidden bg-slate-50 dark:bg-slate-800 cursor-pointer" onclick="showProductDetails('${p.id}')">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="${p.image}" alt="${p.name}" />
+                            ${p.oldPrice ? '<span class="absolute top-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Sale</span>' : ''}
+                            <button class="absolute top-3 right-3 p-1.5 bg-white/80 dark:bg-slate-900/80 rounded-full text-slate-400 hover:text-red-500 transition-colors backdrop-blur">
+                                <span class="material-symbols-outlined text-sm">favorite</span>
                             </button>
                         </div>
+                        <div class="p-5 flex flex-col flex-1">
+                            <p class="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">${p.category.replace('_', ' ')}</p>
+                            <h3 class="product-title text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 cursor-pointer hover:text-primary transition-colors" onclick="showProductDetails('${p.id}')">${p.name}</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">${p.description}</p>
+                            <div class="mt-auto flex flex-col gap-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span class="text-xl font-black text-slate-900 dark:text-slate-100">₹${p.price.toLocaleString()}</span>
+                                        ${p.oldPrice ? `<span class="text-xs text-slate-400 line-through">₹${p.oldPrice.toLocaleString()}</span>` : ''}
+                                    </div>
+                                    <button onclick="addToCart('${p.id}')"
+                                        class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary hover:text-white size-10 rounded-lg flex items-center justify-center transition-all active:scale-95 shadow-sm">
+                                        <span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+                                    </button>
+                                </div>
+                                <button onclick="showProductDetails('${p.id}')"
+                                    class="w-full bg-primary text-slate-900 py-2.5 rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">bolt</span>
+                                    Buy Now
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            `).join('');
-        }
+                `).join('');
+            }
 
-        // Handle category filtering
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const category = btn.getAttribute('data-category');
-                
-                // Update UI state
-                categoryBtns.forEach(b => {
-                    b.classList.remove('active-category', 'bg-primary/10', 'text-primary', 'font-semibold');
-                    b.classList.add('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
-                });
-                btn.classList.add('active-category', 'bg-primary/10', 'text-primary', 'font-semibold');
-                btn.classList.remove('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+            // Handle category filtering
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const category = btn.getAttribute('data-category');
+                    
+                    // Update UI state
+                    categoryBtns.forEach(b => {
+                        b.classList.remove('active-category', 'bg-primary/10', 'text-primary', 'font-semibold');
+                        b.classList.add('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
+                    });
+                    btn.classList.add('active-category', 'bg-primary/10', 'text-primary', 'font-semibold');
+                    btn.classList.remove('hover:bg-slate-100', 'dark:hover:bg-slate-800', 'text-slate-600', 'dark:text-slate-400');
 
-                renderProducts(category, searchInput.value);
+                    renderProducts(category, searchInput ? searchInput.value : '');
 
-                // Close mobile menu if open
-                if (typeof toggleMobileMenu === 'function') {
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (mobileMenu && !mobileMenu.classList.contains('-translate-x-full')) {
-                        toggleMobileMenu();
+                    // Close mobile menu if open
+                    if (typeof toggleMobileMenu === 'function') {
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (mobileMenu && !mobileMenu.classList.contains('-translate-x-full')) {
+                            toggleMobileMenu();
+                        }
                     }
-                }
+                });
             });
-        });
 
-        // Handle search
-        searchInput.addEventListener('input', (e) => {
-            const activeCategory = document.querySelector('.category-filters button.active-category').getAttribute('data-category');
-            renderProducts(activeCategory, e.target.value);
-        });
+            // Handle search
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const activeBtn = document.querySelector('.category-filters button.active-category');
+                    const activeCategory = activeBtn ? activeBtn.getAttribute('data-category') : 'all';
+                    renderProducts(activeCategory, e.target.value);
+                });
+            }
 
-        // Subscribe form
-        document.getElementById('subscribe-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            window.showToast('Subscribed!', 'Welcome to the Aashna Family.', 'success');
-            e.target.reset();
-        });
+            // Subscribe form
+            const subForm = document.getElementById('subscribe-form');
+            if (subForm) {
+                subForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    window.showToast('Subscribed!', 'Welcome to the Aashna Family.', 'success');
+                    e.target.reset();
+                });
+            }
 
-        // Initial render
-        renderProducts();
+            // Initial render
+            renderProducts();
+        });
     </script>
+
     <script src="../js/animations.js" defer></script>
 </body>
 

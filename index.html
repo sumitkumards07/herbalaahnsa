@@ -441,59 +441,76 @@
         </div>
     </div>
     <script>
-        // --- Page Logic (Theme Toggle, Local Events) ---
-        // (Removing redundant cart mock logic as it's now in cart.js)
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (localStorage.theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', function () {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Page Logic (Theme Toggle, Local Events) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
             }
-        });
 
-        document.getElementById('user-btn').addEventListener('click', showAccountAlert);
-        if (document.getElementById('user-btn-mobile')) {
-            document.getElementById('user-btn-mobile').addEventListener('click', showAccountAlert);
-        }
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.theme = 'light';
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.theme = 'dark';
+                    }
+                });
+            }
 
-        function showAccountAlert() {
-            Swal.fire({
-                title: 'Account Access',
-                text: 'Sign in feature coming soon!',
-                icon: 'info',
-                confirmButtonColor: '#20df20'
-            });
-        }
+            const userBtn = document.getElementById('user-btn');
+            if (userBtn) userBtn.addEventListener('click', showAccountAlert);
+            
+            const userBtnMobile = document.getElementById('user-btn-mobile');
+            if (userBtnMobile) userBtnMobile.addEventListener('click', showAccountAlert);
 
-        // --- Home Page Specific JS ---
-        document.getElementById('hero-shop-btn').addEventListener('click', () => {
-            window.location.href = 'shop_page/code.html';
-        });
+            function showAccountAlert() {
+                Swal.fire({
+                    title: 'Account Access',
+                    text: 'Sign in feature coming soon!',
+                    icon: 'info',
+                    confirmButtonColor: '#20df20'
+                });
+            }
 
-        document.getElementById('hero-learn-btn').addEventListener('click', () => {
-            window.location.href = 'about_us_page/code.html';
-        });
+            // --- Home Page Specific JS ---
+            const heroShopBtn = document.getElementById('hero-shop-btn');
+            if (heroShopBtn) {
+                heroShopBtn.addEventListener('click', () => {
+                    window.location.href = 'shop_page/code.html';
+                });
+            }
 
-        document.getElementById('home-story-btn').addEventListener('click', () => {
-            window.location.href = 'about_us_page/code.html';
-        });
+            const heroLearnBtn = document.getElementById('hero-learn-btn');
+            if (heroLearnBtn) {
+                heroLearnBtn.addEventListener('click', () => {
+                    window.location.href = 'about_us_page/code.html';
+                });
+            }
 
-        document.getElementById('subscribe-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            window.showToast('Subscribed!', 'Welcome to the Aashna Family.', 'success');
-            e.target.reset();
+            const homeStoryBtn = document.getElementById('home-story-btn');
+            if (homeStoryBtn) {
+                homeStoryBtn.addEventListener('click', () => {
+                    window.location.href = 'about_us_page/code.html';
+                });
+            }
+
+            const subscribeForm = document.getElementById('subscribe-form');
+            if (subscribeForm) {
+                subscribeForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    window.showToast('Subscribed!', 'Welcome to the Aashna Family.', 'success');
+                    e.target.reset();
+                });
+            }
         });
     </script>
     <script src="js/animations.js" defer></script>
 </body>
 
 </html>
+```

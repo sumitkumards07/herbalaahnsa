@@ -423,39 +423,44 @@
         </div>
     </div>
     <script>
-        // --- Page Logic (Theme Toggle, Local Events) ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        if (localStorage.theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', function () {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function () {
+                    if (document.documentElement.classList.contains('dark')) {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.theme = 'light';
+                    } else {
+                        document.documentElement.classList.add('dark');
+                        localStorage.theme = 'dark';
+                    }
+                });
+            }
+
+            const userBtn = document.getElementById('user-btn');
+            if (userBtn) userBtn.addEventListener('click', showAccountAlert);
+            
+            const userBtnMobile = document.getElementById('user-btn-mobile');
+            if (userBtnMobile) userBtnMobile.addEventListener('click', showAccountAlert);
+
+            function showAccountAlert() {
+                Swal.fire({
+                    title: 'Account Access',
+                    text: 'Sign in feature coming soon!',
+                    icon: 'info',
+                    confirmButtonColor: '#20df20'
+                });
             }
         });
-
-        document.getElementById('user-btn').addEventListener('click', showAccountAlert);
-        if (document.getElementById('user-btn-mobile')) {
-            document.getElementById('user-btn-mobile').addEventListener('click', showAccountAlert);
-        }
-
-        function showAccountAlert() {
-            Swal.fire({
-                title: 'Account Access',
-                text: 'Sign in feature coming soon!',
-                icon: 'info',
-                confirmButtonColor: '#20df20'
-            });
-        }
     </script>
     <script src="../js/animations.js" defer></script>
 </body>
 
 </html>
+```
