@@ -9,8 +9,12 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <style>html { visibility: hidden; }</style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="js/products.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
     <link
@@ -19,6 +23,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="css/animations.css" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -54,22 +59,25 @@
         <header
             class="sticky top-0 z-50 w-full bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
             <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
-                <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4">
+                    <button id="menu-btn" class="flex md:hidden items-center justify-center p-2 text-slate-800 dark:text-slate-200">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
                     <div class="flex items-center gap-2 text-slate-900 dark:text-slate-100">
                         <span class="material-symbols-outlined text-primary text-3xl">eco</span>
                         <h2 class="text-xl font-extrabold tracking-tight">Aashna Herbals</h2>
                     </div>
-                    <nav class="hidden md:flex items-center gap-8">
-                        <a class="text-primary text-sm font-bold border-b-2 border-primary" href="index.html">Home</a>
-                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
-                            href="shop_page/code.html">Shop</a>
-                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
-                            href="about_us_page/code.html">Our Story</a>
-                        <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
-                            href="contact_page/code.html">Contact</a>
-                    </nav>
                 </div>
-                <div class="flex flex-1 justify-end gap-4 md:gap-6">
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-primary text-sm font-bold border-b-2 border-primary" href="index.html">Home</a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
+                        href="shop_page/code.html">Shop</a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
+                        href="about_us_page/code.html">Our Story</a>
+                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors text-sm font-medium"
+                        href="contact_page/code.html">Contact</a>
+                </nav>
+                <div class="flex flex-1 justify-end gap-2 md:gap-6">
                     <label
                         class="hidden lg:flex items-stretch rounded-full bg-primary/5 dark:bg-primary/10 border border-primary/20 px-4 h-10 w-64 overflow-hidden focus-within:ring-2 ring-primary/40">
                         <div class="flex items-center text-primary/70">
@@ -101,10 +109,10 @@
         </header>
         <main class="flex-grow">
             <section class="relative h-[600px] w-full @container">
-                <div class="absolute inset-0 bg-cover bg-center" data-alt="Lush green herbal garden background"
+                <div class="absolute inset-0 bg-cover bg-center animate-float" data-alt="Lush green herbal garden background"
                     style='background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqwwRlQw7_HMNIQU7oXFT5wYQO7rlx6bmPX2aXQOiImCwS_etYmDmAENOz4JvJV3vzMEj8oPcYAjD6D36j5lDUxIr31UA306IJjm1uXBi8nHaBcAEQGnVHIpYKxHhNzfx23P3fBGb4g0-z0FL9753c8gDf3pYGk4Y_Vl3wwoJIA__ra4V7fUf4q5MKWwaGdSjdo_XIxILodNYzpj_4JIBWiz6II-pS_rianOVRvjooqCQDcAX9oAJl41t8StTJoqPeKQd-TApJ");'>
                 </div>
-                <div class="relative flex h-full items-center justify-center px-6 text-center">
+                <div class="relative flex h-full items-center justify-center px-6 text-center reveal">
                     <div class="max-w-3xl flex flex-col items-center gap-8">
                         <div class="space-y-4">
                             <span
@@ -131,7 +139,7 @@
                     </div>
                 </div>
             </section>
-            <section class="mx-auto max-w-7xl px-6 py-20">
+            <section class="mx-auto max-w-7xl px-6 py-20 reveal">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div class="space-y-2">
                         <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Featured
@@ -145,13 +153,13 @@
                     </a>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="group flex flex-col gap-4">
+                    <div class="group flex flex-col gap-4 reveal tilt-card">
                         <div class="relative aspect-square overflow-hidden rounded-xl bg-primary/5">
                             <img alt="Aloe Vera Gel"
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 data-alt="Aloe Vera Gel in a minimalist glass jar"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO_v3JS4SiOqn8EjGtHIQZ3n6lE5MO1J33TiFC21CqHU-yhAQ8cCYiKn-nNdms0HASND3Ejts5ugt-ebgw89sWDFtNje-SN2kMl44lqZO0yNjTDcSjQA_YC0Ri-RzKI9TI9cjgOciXPakBi7gUJbctfw1qJrgH0FuU8XX3gqQt4vKQ3PUsC__9j9O4pn66flo5PUqPMKJ_P3pW2jPuOHKDZmiXrJd59qDGqrFjNIPbeiHjLHeLc8JW8jmqasoVp-IuTOZ1dg3S" />
-                            <button onclick="addToCart('Pure Aloe Vera Gel')"
+                            <button onclick="addToCart('aloe-vera-gel')"
                                 class="absolute bottom-4 right-4 translate-y-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 rounded-full bg-white p-3 text-slate-900 shadow-lg hover:bg-primary">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
@@ -167,7 +175,7 @@
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 data-alt="Neem leaf facial cleanser bottle"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7NF0aMPH81ys0KIY6F0r7t7ptoZX1ex4Ro1m_OZyg2HjWfwTzijM239AB_PyhT18WWzpg7iiPLaAAyRgJiEl57rkgHQ4O9LI6OlJlIvmRDsQ49ByLrQrBqyxTJl5c83JY5kAbGr4WKITFjtZVLqaGa-sqtV_k8XpYyuO09uMPRfwauRg_JS0c75qAISCzTxWwwpO25bc_Ply2u5aHriLLPadnuhB4gtfdqV9UcMrc6cuJq2mkaGRnXrt3UjV4jA_YgK-oG8SR" />
-                            <button onclick="addToCart('Neem Leaf Cleanser')"
+                            <button onclick="addToCart('neem-cleanser')"
                                 class="absolute bottom-4 right-4 translate-y-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 rounded-full bg-white p-3 text-slate-900 shadow-lg hover:bg-primary">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
@@ -183,7 +191,7 @@
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 data-alt="Rose water spray bottle with rose petals"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPD4sZw-_nPKWABf2gcktk0KTYMHHouTCkVk7B90cgkiQSNijH7PHiUHCjaNhTJfvLxCrqgOV7_kpZIBfuLJ8DIaDuQKhb_rJTg3Kql_mT6Kyt_jQIzCsuvOpPbgmPZNS9vXWeYUsfq610TiDXise2h3ybfccvScD9xZ_Tw-xqEFCxc-bGPD3ORZqMlY5-OCaixchlaTnIgT1Qxp0v_hMkdVm_f5er9l1INj53FK0cnetm71S4v6-I_Hkb0CBAwncQS7xXIWfD" />
-                            <button onclick="addToCart('Organic Rose Water')"
+                            <button onclick="addToCart('rose-water')"
                                 class="absolute bottom-4 right-4 translate-y-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 rounded-full bg-white p-3 text-slate-900 shadow-lg hover:bg-primary">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
@@ -199,7 +207,7 @@
                                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 data-alt="Yellow turmeric scrub paste in a wooden bowl"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCagpHNRINIT4YXjRDV6FYn1D71984iNnz92CFg22IOF3ooHR-9TbOe5aOSuDsPDNWBgpLL6IZGU522azAU_K-7VZFfItK0gSnwKPxbhvsZptYIhxG8ncYYuBK68d5S6jyxM0wfPOrOWbLlEjFNGckXe89XSXtMG3cEnChbk7BM5TRcjpG6_dZzmbFviM1a0I_S6mwDXGhteYzS37VCLKvIDENTP7ynPUMSkpF2gTCDYk40GBH0amczqcgkpG91W9X6kAXZ-edc" />
-                            <button onclick="addToCart('Turmeric Brightening Scrub')"
+                            <button onclick="addToCart('turmeric-scrub')"
                                 class="absolute bottom-4 right-4 translate-y-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 rounded-full bg-white p-3 text-slate-900 shadow-lg hover:bg-primary">
                                 <span class="material-symbols-outlined">add_shopping_cart</span>
                             </button>
@@ -361,10 +369,72 @@
                 </div>
             </div>
         </footer>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="menu-overlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/50 z-[99] hidden backdrop-blur-sm"></div>
+        <div id="mobile-menu" class="fixed top-0 left-0 h-full w-[280px] bg-white dark:bg-background-dark z-[100] -translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col text-slate-900 dark:text-slate-100">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-primary">
+                    <span class="material-symbols-outlined text-2xl">eco</span>
+                    <span class="font-bold">Aashna Herbals</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <nav class="p-6 flex flex-col gap-6 text-lg font-medium">
+                <a class="text-primary flex items-center gap-3" href="index.html">
+                    <span class="material-symbols-outlined">home</span> Home
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 hover:text-primary flex items-center gap-3 transition-colors" href="shop_page/code.html">
+                    <span class="material-symbols-outlined">shopping_basket</span> Shop Collection
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 hover:text-primary flex items-center gap-3 transition-colors" href="about_us_page/code.html">
+                    <span class="material-symbols-outlined">history_edu</span> Our Story
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 hover:text-primary flex items-center gap-3 transition-colors" href="contact_page/code.html">
+                    <span class="material-symbols-outlined">mail</span> Contact Us
+                </a>
+            </nav>
+            <div class="mt-auto p-6 border-t border-slate-100 dark:border-slate-800">
+                <button id="user-btn-mobile" class="w-full flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 py-3 rounded-lg font-bold">
+                    <span class="material-symbols-outlined">person</span>
+                    Account Access
+                </button>
+            </div>
+        </div>
+
+        <!-- Cart Modal Drawer -->
+        <div id="cart-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/50 z-[99] hidden backdrop-blur-sm"></div>
+        <div id="cart-modal" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white dark:bg-background-dark z-[100] translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col text-slate-900 dark:text-slate-100">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <h2 class="text-xl font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                    Your Shopping Bag
+                </h2>
+                <button onclick="toggleCart()" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Items injected by cart.js -->
+            </div>
+            <div id="cart-footer" class="p-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-background-dark hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-slate-500 font-medium">Subtotal</span>
+                    <span id="cart-total-amount" class="text-2xl font-black text-slate-900 dark:text-slate-100">₹0</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="w-full bg-primary text-slate-900 font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                    Proceed to Checkout
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                <p class="text-center text-[10px] text-slate-400 mt-4">Shipping and taxes calculated at checkout</p>
+            </div>
+        </div>
     </div>
     <script>
-        // --- Global JS (Theme, Cart) ---
-        // Dark mode logic
+        // --- Page Logic (Theme Toggle, Local Events) ---
+        // (Removing redundant cart mock logic as it's now in cart.js)
         const themeToggleBtn = document.getElementById('theme-toggle');
         if (localStorage.theme === 'dark') {
             document.documentElement.classList.add('dark');
@@ -382,57 +452,18 @@
             }
         });
 
-        // Mock Cart and User functionality
-        let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
-        const cartCounterEl = document.getElementById('cart-counter');
-
-        function updateCartUI() {
-            if (cartCount > 0) {
-                cartCounterEl.textContent = cartCount;
-                cartCounterEl.classList.remove('hidden');
-            } else {
-                cartCounterEl.classList.add('hidden');
-            }
+        document.getElementById('user-btn').addEventListener('click', showAccountAlert);
+        if (document.getElementById('user-btn-mobile')) {
+            document.getElementById('user-btn-mobile').addEventListener('click', showAccountAlert);
         }
-        updateCartUI();
 
-        document.getElementById('cart-btn').addEventListener('click', () => {
-            Swal.fire({
-                title: 'Shopping Cart',
-                text: cartCount > 0 ? `You have ${cartCount} items in your bag.` : 'Your bag is empty.',
-                icon: 'info',
-                confirmButtonColor: '#20df20'
-            });
-        });
-
-        document.getElementById('user-btn').addEventListener('click', () => {
+        function showAccountAlert() {
             Swal.fire({
                 title: 'Account Access',
                 text: 'Sign in feature coming soon!',
                 icon: 'info',
                 confirmButtonColor: '#20df20'
             });
-        });
-
-        // Make global helper functions to trigger toasts
-        window.showToast = function (title, text, icon) {
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                icon: icon,
-                title: title,
-                text: text,
-            });
-        }
-
-        window.addToCart = function (productName) {
-            cartCount++;
-            localStorage.setItem('cartCount', cartCount);
-            updateCartUI();
-            window.showToast('Added to Cart', `${productName} has been added!`, 'success');
         }
 
         // --- Home Page Specific JS ---
@@ -454,6 +485,7 @@
             e.target.reset();
         });
     </script>
+    <script src="js/animations.js" defer></script>
 </body>
 
 </html>

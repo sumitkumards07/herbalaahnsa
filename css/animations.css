@@ -1,0 +1,91 @@
+/* Aashna Herbals - Visual Enhancements */
+
+:root {
+    --transition-standard: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Page Entry Fade */
+body {
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Scroll Reveal Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: var(--transition-standard);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: var(--transition-standard);
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: var(--transition-standard);
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* 3D Tilt Container */
+.tilt-card {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.tilt-inner {
+    transform: translateZ(20px);
+}
+
+/* Floating Animation for Hero Images */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Button Pulse/Magnetic Effect */
+.btn-hover-glow:hover {
+    box-shadow: 0 0 20px rgba(32, 223, 32, 0.4);
+    transform: scale(1.02);
+}
+
+/* Glassmorphism Depth */
+.glass-depth {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark .glass-depth {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
