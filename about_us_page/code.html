@@ -5,15 +5,21 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About Us | Aashna Herbals</title>
+    
+    <!-- Critical FOUC Fix -->
+    <style>html { opacity: 0; }</style>
+
+    <!-- Performance Preloads -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <style>html { visibility: hidden; }</style>
+    <link rel="preload" as="image" href="https://lh3.googleusercontent.com/aida-public/AB6AXuAJn1f2nnVTu1MG3Ojp1JukSc6RDDqLVk8KxyWxbX1HTcp1OgWVPq662iGLimpxuadNJfEj5Ian7cqj7SksA26AgZG-12dmIdJ_uGNETOCOscoBq_yeGZnFyGd2yfZZUQKpnHFggb9iXimNwoxPOn0ztxgwiUptm8Y8_3iQCUHv7wsMBWPdFWvONl1QVl2Wda4xkXVFzsUpPb9QkOR2RUchL0wpCGf5IQzWozzOD_c8mbxro2ktO3CI6abbU2kb1BqqPSD3uRlZ" fetchpriority="high">
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="../js/products.js" defer></script>
     <script src="../js/cart.js" defer></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
     <link
@@ -93,10 +99,14 @@
                 <!-- Hero Section -->
                 <section class="px-6 lg:px-40 py-12 lg:py-20">
                     <div class="@container">
-                        <div class="relative min-h-[450px] flex flex-col justify-end overflow-hidden rounded-xl bg-slate-200"
-                            data-alt="Lush green herbal garden with morning dew"
-                            style='background-image: linear-gradient(0deg, rgba(17, 33, 17, 0.8) 0%, rgba(17, 33, 17, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAJn1f2nnVTu1MG3Ojp1JukSc6RDDqLVk8KxyWxbX1HTcp1OgWVPq662iGLimpxuadNJfEj5Ian7cqj7SksA26AgZG-12dmIdJ_uGNETOCOscoBq_yeGZnFyGd2yfZZUQKpnHFggb9iXimNwoxPOn0ztxgwiUptm8Y8_3iQCUHv7wsMBWPdFWvONl1QVl2Wda4xkXVFzsUpPb9QkOR2RUchL0wpCGf5IQzWozzOD_c8mbxro2ktO3CI6abbU2kb1BqqPSD3uRlZ"); background-size: cover; background-position: center;'>
-                            <div class="p-8 lg:p-12 max-w-2xl">
+                        <div class="relative min-h-[450px] flex flex-col justify-end overflow-hidden rounded-xl bg-slate-200">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJn1f2nnVTu1MG3Ojp1JukSc6RDDqLVk8KxyWxbX1HTcp1OgWVPq662iGLimpxuadNJfEj5Ian7cqj7SksA26AgZG-12dmIdJ_uGNETOCOscoBq_yeGZnFyGd2yfZZUQKpnHFggb9iXimNwoxPOn0ztxgwiUptm8Y8_3iQCUHv7wsMBWPdFWvONl1QVl2Wda4xkXVFzsUpPb9QkOR2RUchL0wpCGf5IQzWozzOD_c8mbxro2ktO3CI6abbU2kb1BqqPSD3uRlZ" 
+                                 class="absolute inset-0 h-full w-full object-cover animate-float" 
+                                 alt="Lush green herbal garden with morning dew"
+                                 fetchpriority="high"
+                                 loading="eager">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="relative p-8 lg:p-12 max-w-2xl">
                                 <span
                                     class="inline-block px-3 py-1 rounded-full bg-primary text-background-dark text-xs font-bold uppercase tracking-widest mb-4">Our
                                     Heritage</span>

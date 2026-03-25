@@ -6,15 +6,20 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Aashna Herbals | Nature's Purity</title>
+    
+    <!-- Critical FOUC Fix -->
+    <style>html { opacity: 0; }</style>
+
+    <!-- Performance Preloads -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <style>html { visibility: hidden; }</style>
+    <link rel="preload" as="image" href="https://lh3.googleusercontent.com/aida-public/AB6AXuCqwwRlQw7_HMNIQU7oXFT5wYQO7rlx6bmPX2aXQOiImCwS_etYmDmAENOz4JvJV3vzMEj8oPcYAjD6D36j5lDUxIr31UA306IJjm1uXBi8nHaBcAEQGnVHIpYKxHhNzfx23P3fBGb4g0-z0FL9753c8gDf3pYGk4Y_Vl3wwoJIA__ra4V7fUf4q5MKWwaGdSjdo_XIxILodNYzpj_4JIBWiz6II-pS_rianOVRvjooqCQDcAX9oAJl41t8StTJoqPeKQd-TApJ" fetchpriority="high">
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="js/products.js" defer></script>
     <script src="js/cart.js" defer></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
     <link
@@ -108,10 +113,13 @@
             </div>
         </header>
         <main class="flex-grow">
-            <section class="relative h-[600px] w-full @container">
-                <div class="absolute inset-0 bg-cover bg-center animate-float" data-alt="Lush green herbal garden background"
-                    style='background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqwwRlQw7_HMNIQU7oXFT5wYQO7rlx6bmPX2aXQOiImCwS_etYmDmAENOz4JvJV3vzMEj8oPcYAjD6D36j5lDUxIr31UA306IJjm1uXBi8nHaBcAEQGnVHIpYKxHhNzfx23P3fBGb4g0-z0FL9753c8gDf3pYGk4Y_Vl3wwoJIA__ra4V7fUf4q5MKWwaGdSjdo_XIxILodNYzpj_4JIBWiz6II-pS_rianOVRvjooqCQDcAX9oAJl41t8StTJoqPeKQd-TApJ");'>
-                </div>
+            <section class="relative h-[600px] w-full @container overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqwwRlQw7_HMNIQU7oXFT5wYQO7rlx6bmPX2aXQOiImCwS_etYmDmAENOz4JvJV3vzMEj8oPcYAjD6D36j5lDUxIr31UA306IJjm1uXBi8nHaBcAEQGnVHIpYKxHhNzfx23P3fBGb4g0-z0FL9753c8gDf3pYGk4Y_Vl3wwoJIA__ra4V7fUf4q5MKWwaGdSjdo_XIxILodNYzpj_4JIBWiz6II-pS_rianOVRvjooqCQDcAX9oAJl41t8StTJoqPeKQd-TApJ" 
+                     class="absolute inset-0 h-full w-full object-cover animate-float" 
+                     alt="Lush green herbal garden background"
+                     fetchpriority="high"
+                     loading="eager">
+                <div class="absolute inset-0 bg-black/40"></div>
                 <div class="relative flex h-full items-center justify-center px-6 text-center reveal">
                     <div class="max-w-3xl flex flex-col items-center gap-8">
                         <div class="space-y-4">

@@ -5,15 +5,21 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contact Us | Aashna Herbals</title>
+    
+    <!-- Critical FOUC Fix -->
+    <style>html { opacity: 0; }</style>
+
+    <!-- Performance Preloads -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <style>html { visibility: hidden; }</style>
+    <link rel="preload" as="image" href="https://lh3.googleusercontent.com/aida-public/AB6AXuCT_WzxQomgeVJvc6KT3AG0XdEiuwhhxYV-DIIi0gByd_vZl661nnkclqFB3ZtZQjoiuvrhZziwIVCI9MXYi0O6QzYf-5IY8Khp7xRNteftYZFLYlznQi_ghcyxAgqXivboYRk7ASsvrbXDmiRXnWM4WBhNl1foS8wQcHL7tr9IYIyOlAydHJyahKzoFpse9C5CHPJ_pgnNrMEGSQGB1QzX1GZUr3t9F3ysMUUjuRmzFdplN-o2mVGDKVR0VQAJHcRK-xjZPnBt" fetchpriority="high">
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="../js/products.js" defer></script>
     <script src="../js/cart.js" defer></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" defer></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
@@ -101,10 +107,14 @@
                 <div class="px-4 lg:px-40 py-10 max-w-[1200px] mx-auto">
                     <div class="@container">
                         <div class="@[480px]:py-3">
-                            <div class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[320px] shadow-xl relative animate-float"
-                                data-alt="Calm spa treatment table with herbal oils"
-                                style='background-image: linear-gradient(0deg, rgba(17, 33, 17, 0.8) 0%, rgba(17, 33, 17, 0) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCT_WzxQomgeVJvc6KT3AG0XdEiuwhhxYV-DIIi0gByd_vZl661nnkclqFB3ZtZQjoiuvrhZziwIVCI9MXYi0O6QzYf-5IY8Khp7xRNteftYZFLYlznQi_ghcyxAgqXivboYRk7ASsvrbXDmiRXnWM4WBhNl1foS8wQcHL7tr9IYIyOlAydHJyahKzoFpse9C5CHPJ_pgnNrMEGSQGB1QzX1GZUr3t9F3ysMUUjuRmzFdplN-o2mVGDKVR0VQAJHcRK-xjZPnBt");'>
-                                <div class="p-8">
+                            <div class="relative flex flex-col justify-end overflow-hidden rounded-xl min-h-[320px] shadow-xl">
+                                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT_WzxQomgeVJvc6KT3AG0XdEiuwhhxYV-DIIi0gByd_vZl661nnkclqFB3ZtZQjoiuvrhZziwIVCI9MXYi0O6QzYf-5IY8Khp7xRNteftYZFLYlznQi_ghcyxAgqXivboYRk7ASsvrbXDmiRXnWM4WBhNl1foS8wQcHL7tr9IYIyOlAydHJyahKzoFpse9C5CHPJ_pgnNrMEGSQGB1QzX1GZUr3t9F3ysMUUjuRmzFdplN-o2mVGDKVR0VQAJHcRK-xjZPnBt" 
+                                     class="absolute inset-0 h-full w-full object-cover animate-float" 
+                                     alt="Calm spa treatment table with herbal oils"
+                                     fetchpriority="high"
+                                     loading="eager">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                                <div class="relative p-8">
                                     <h1 class="text-white text-4xl font-extrabold leading-tight tracking-tight">Get in
                                         Touch</h1>
                                     <p class="text-white/80 text-lg mt-2">Connecting nature's wisdom with your daily

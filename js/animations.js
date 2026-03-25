@@ -1,8 +1,8 @@
 /* Aashna Herbals - Interactive Animations */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Restore visibility and fade in
-    document.documentElement.style.visibility = 'visible';
+    // Restore opacity and fade in
+    document.documentElement.style.opacity = '1';
     document.body.classList.add('loaded');
 
     // 2. Scroll Reveal Observer
