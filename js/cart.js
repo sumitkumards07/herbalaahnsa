@@ -208,6 +208,57 @@ window.showToast = function (title, text, icon) {
     });
 }
 
+window.showProductDetails = function(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    Swal.fire({
+        title: product.name,
+        html: `
+            <div class="flex flex-col gap-6 text-left p-2">
+                <div class="relative aspect-square overflow-hidden rounded-xl bg-slate-50 dark:bg-slate-800 shadow-inner">
+                    <img src="${product.image}" class="h-full w-full object-cover animate-float" alt="${product.name}">
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-3xl font-black text-primary">₹${product.price.toLocaleString()}</p>
+                        ${product.oldPrice ? `<p class="text-sm text-slate-400 line-through">₹${product.oldPrice.toLocaleString()}</p>` : ''}
+                    </div>
+                    <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">${product.description}</p>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-primary">verified_user</span>
+                        <p class="text-xs text-slate-500">100% Pure & Organic Certified</p>
+                    </div>
+                </div>
+            </div>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Buy Now',
+        cancelButtonText: 'Add to Cart',
+        confirmButtonColor: '#20df20',
+        cancelButtonColor: '#64748b',
+        reverseButtons: true,
+        customClass: {
+            container: 'product-detail-modal',
+            popup: 'rounded-3xl dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-2xl',
+            title: 'text-2xl font-bold dark:text-white pt-8 px-8 text-left',
+            htmlContainer: 'px-6 pb-2',
+            actions: 'flex gap-3 px-8 pb-8 pt-4 justify-stretch',
+            confirmButton: 'flex-1 py-4 font-bold rounded-2xl shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform',
+            cancelButton: 'flex-1 py-4 font-bold rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            addToCart(productId);
+            setTimeout(() => {
+                proceedToCheckout();
+            }, 300);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            addToCart(productId);
+        }
+    });
+}
+
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
     updateCartIcon();
